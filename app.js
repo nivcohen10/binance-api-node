@@ -1,6 +1,8 @@
 const binance = require('node-binance-api');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const express = require('express');
+const app = express();
 const Ticker = require('./common/models/ticker')
 const Transaction = require('./common/models/transaction')
 const Balance = require('./common/models/balance')
@@ -10,9 +12,13 @@ const Balance = require('./common/models/balance')
 const dbName = process.env.DB_NAME || "test";
 const buyPrice = process.env.BUY_PRICE || 0.993;
 const sellPrice = process.env.SELL_PRICE || 1.005;
-const PORT = process.env.PORT || 3000;
+
 
 mongoose.connect('mongodb://binance-api:binance-api@binance-api-shard-00-00-ksjtb.mongodb.net:27017,binance-api-shard-00-01-ksjtb.mongodb.net:27017,binance-api-shard-00-02-ksjtb.mongodb.net:27017/' + dbName + '?ssl=true&replicaSet=binance-api-shard-0&authSource=admin', );
+
+app.listen(process.env.PORT || 5000, () => {
+    console.log("started")
+});
 
 binance.options({
     APIKEY: 'vcR3xvFgivgxE84x0apBlouTrRYHt5oCTxnJfZxb6A8Z8yfkQAQiQwElcw2yuBzN',
@@ -21,7 +27,7 @@ binance.options({
     test: false // If you want to use sandbox mode where orders are simulated
 });
 
-console.log("started")
+
 
 function tickerFunc() {
     // https://www.bitstamp.net/api/ticker
