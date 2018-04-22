@@ -17,7 +17,7 @@ binance.options({
     APIKEY: 'vcR3xvFgivgxE84x0apBlouTrRYHt5oCTxnJfZxb6A8Z8yfkQAQiQwElcw2yuBzN',
     APISECRET: '9btQw9hWbxGVsjJeNoBFae4w8mUVdA4hO4F9PMMAddaKraH21dC5DmM6maUv0Iyq',
     useServerTime: true, // If you get timestamp errors, synchronize to server time at startup
-    test: true // If you want to use sandbox mode where orders are simulated
+    test: false // If you want to use sandbox mode where orders are simulated
 });
 
 console.log("started")
@@ -95,12 +95,12 @@ function GetMode() {
                 if (res.mode == "Buy")
                     resolve("Sell");
                 else
-                    resolve("Buy")                
+                    resolve("Sell")                
             }
             else
-                resolve("Buy");
+                resolve("Sell");
         }).catch(err => {
-            resolve("Buy");
+            resolve("Sell");
         })
     })
 }
