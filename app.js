@@ -24,7 +24,7 @@ console.log("started")
 
 function tickerFunc() {
     // https://www.bitstamp.net/api/ticker
-    console,log("Running", Date.now())
+    console.log("Running", Date.now())
     GetBitcoinPriceFromCoindesk()
         .then(response => {
             binance.prices((error, ticker) => {
