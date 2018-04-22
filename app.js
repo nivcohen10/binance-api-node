@@ -24,6 +24,7 @@ console.log("started")
 
 function tickerFunc() {
     // https://www.bitstamp.net/api/ticker
+    console,log("Running", Date.now())
     GetBitcoinPriceFromCoindesk()
         .then(response => {
             binance.prices((error, ticker) => {
@@ -35,7 +36,7 @@ function tickerFunc() {
                         usdt_price: usdtPrice,
                         target_price: mode == "Sell" ? sellPrice : buyPrice,
                     }).save();
-    
+
                     if (mode == "Sell" && usdtPrice > sellPrice) {
                         BuyBitcoin();
                     }
@@ -48,10 +49,10 @@ function tickerFunc() {
         .catch(error => {
             //console.log(error);
         });
-   
+
     // cancel all open orders
     // binance.cancelOrders("XMRBTC", (error, response, symbol) => {
-        //console.log(symbol+" cancel response:", response);
+    //console.log(symbol+" cancel response:", response);
     // });
 
     /*      Placing a MARKET order
@@ -71,7 +72,7 @@ function balanceFunc() {
             // todo: store in db
             const balance = new Balance({
                 usdt: usdt,
-                bitcoin : bitcoin,
+                bitcoin: bitcoin,
                 total: total
             }).save()
         })
@@ -85,17 +86,19 @@ try {
 catch (error) {
     {
         console.log("Exception:", error);
+        setInterval(tickerFunc, 10000);
+        setInterval(balanceFunc, 10000 * 6 * 60);
     }
 }
 
 function GetMode() {
-    return new Promise ((resolve, reject) => {
-        Transaction.findOne().sort({"createdAt": -1}).exec().then(res => {
-            if (res){
+    return new Promise((resolve, reject) => {
+        Transaction.findOne().sort({ "createdAt": -1 }).exec().then(res => {
+            if (res) {
                 if (res.mode == "Buy")
                     resolve("Sell");
                 else
-                    resolve("Sell")                
+                    resolve("Sell")
             }
             else
                 resolve("Sell");
