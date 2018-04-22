@@ -13,5 +13,9 @@
     "axios": "^0.18.0",
     "mongoose": "^5.0.15",
     "node-binance-api": "^0.4.29"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
   }
 }
