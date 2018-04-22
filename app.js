@@ -10,6 +10,7 @@ const Balance = require('./common/models/balance')
 const dbName = process.env.DB_NAME || "test";
 const buyPrice = process.env.BUY_PRICE || 0.993;
 const sellPrice = process.env.SELL_PRICE || 1.005;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://binance-api:binance-api@binance-api-shard-00-00-ksjtb.mongodb.net:27017,binance-api-shard-00-01-ksjtb.mongodb.net:27017,binance-api-shard-00-02-ksjtb.mongodb.net:27017/' + dbName + '?ssl=true&replicaSet=binance-api-shard-0&authSource=admin', );
 
