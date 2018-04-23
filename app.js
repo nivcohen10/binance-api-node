@@ -20,6 +20,19 @@ app.listen(process.env.PORT || 5000, () => {
     console.log("started")
 });
 
+
+app.use((req, res, next) => {
+    console.log("api")
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    if (req.method == 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET ,PUT ,POST');
+        return res.status(200).json({});
+    }
+    return res.status(200).json({});
+});
+
+
 binance.options({
     APIKEY: 'vcR3xvFgivgxE84x0apBlouTrRYHt5oCTxnJfZxb6A8Z8yfkQAQiQwElcw2yuBzN',
     APISECRET: '9btQw9hWbxGVsjJeNoBFae4w8mUVdA4hO4F9PMMAddaKraH21dC5DmM6maUv0Iyq',
