@@ -20,7 +20,6 @@ app.listen(process.env.PORT || 5000, () => {
     console.log("started")
 });
 
-
 app.use((req, res, next) => {
     console.log("api")
     res.header("Access-Control-Allow-Origin", "*");
